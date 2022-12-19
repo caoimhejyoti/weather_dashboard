@@ -103,7 +103,10 @@ let displayCurrentWeather = function () {
     let locationNameEL = document.createElement("h2");
     
     let titleEL = document.createElement("span");
+    console.log("titleEL: " + titleEL);
     titleEL.textContent = location;
+    
+    console.log("searchResultsContainerEl: " + searchResultsContainerEl);
 
     searchResultsContainerEl.appendChild(titleEL);
     // document.getElementsByClassName(".subtitle").appendChild(locationNameEL);

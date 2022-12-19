@@ -10,7 +10,7 @@ let currentDayContainerEl = document.querySelector("#location-searched");
 let fiveDayContainerEl = document.querySelector(".five-day-container");
 
 // display variables
-let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData"));
+let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
 // console.log(currentWeather);
 
 
@@ -49,7 +49,8 @@ let getLocationCurrentWeather = function (locationSearched) {
                 console.log(data);
             if (response.ok) {
                 localStorage.setItem("currentWeatherData", JSON.stringify(data));
-                console.log(currentWeather + "( source: getLocationCurrentWeather)"); //FIXME: this currently reads null.
+                currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
+                console.log(currentWeather + " (source: getLocationCurrentWeather)"); //FIXME: this currently reads null. 
                 displayCurrentWeather(); 
             }else{
             alert("Error: " + response.statusText);

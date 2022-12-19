@@ -3,9 +3,16 @@ let apiBaseURL = 'http://http://api.openweathermap.org/data/2.5/weather?q=';
 let apiKey = "&APPID=73d12f90301263ae1498b68e5abab7e5";
 let locationInputEl = document.querySelector(".location");
 let previousSearchEl = document.querySelector(".previous-search");
-let locationSearchForm = document.querySelector(".location-search");
+let locationSearchForm = document.querySelector("#location-search");
+let searchResultsContainerEl = document.querySelector(".search-results-container");
+let currentDayContainerEl = document.querySelector(".current-day-container");
+let fiveDayContainerEl = document.querySelector(".five-day-container");
 
-// user inputs information into search field
+// display variables
+
+
+
+// TODO: REVIEW: user inputs information into search field
  let formSubmitLocation = function (e) {
     e.preventDefault();
     
@@ -25,7 +32,7 @@ let locationSearchForm = document.querySelector(".location-search");
 
 
 
-// selecting search button triggers API information fetch request
+// TODO: REVIEW: selecting search button triggers API information fetch request
 let getLocationWeather = function (locationSearched) {
     let apiURL = apiBaseURL + locationSearched + apiKey;
 
@@ -56,13 +63,33 @@ let getLocationWeather = function (locationSearched) {
     //[present] current day card across the top of the page
     //[future] 5 day forcast is created below with each day being a card. 
     // information required is date, temp (C), wind (KMPH) and humidity.
+let displayWeather = function (weather, searchTerm) {
+
+    if (weather.length === 0) {
+        currentDayContainerEl.textContent = "Location not found";
+        return;
+    }
+    console.log("weather is empty");
+
+    locationSearchTerm.textContent = searchTerm;
+
+    for (var i = 0; i < weather.length; i++) {
+
+        let locationNameEL = document.createElement("h2");
+        
+        let titleEL = document.createElement("span");
+        titleEL.textContent = locationInputEl;
+
+        locationNameEL.appendChild(titleEL);
 
 
 
 
 
 
-
+    };
+    console.log("weather is not empty");
+};
 
 // user selects search button
 locationSearchForm.addEventListener('submit', formSubmitLocation);

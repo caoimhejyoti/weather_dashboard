@@ -1,6 +1,6 @@
 // global variables
-let apiURL = 'http://http://api.openweathermap.org/data/2.5/weather?q=';
-let apiKey = "73d12f90301263ae1498b68e5abab7e5";
+let apiBaseURL = 'http://http://api.openweathermap.org/data/2.5/weather?q=';
+let apiKey = "&APPID=73d12f90301263ae1498b68e5abab7e5";
 let locationInputEl = document.querySelector(".location");
 let previousSearchEl = document.querySelector(".previous-search");
 let locationSearchForm = document.querySelector(".location-search");
@@ -26,8 +26,24 @@ let locationSearchForm = document.querySelector(".location-search");
 
 
 // selecting search button triggers API information fetch request
+let getLocationWeather = function (locationSearched) {
+    let apiURL = apiBaseURL + locationSearched + apiKey;
 
-
+    fetch (apiURL)
+        .then (function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    displayWeather(data, locationSearched);
+                });
+            }else {
+                alert("Error: " + response.statusText);
+            }
+        })
+        .catch (function (error) {
+            alert("Unable to connect to WeatherService");
+        });
+    console.log("fetch apiURL is working");
+};
 // previous search button is created within aside div
 
 

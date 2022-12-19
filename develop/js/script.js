@@ -5,7 +5,7 @@ let locationInputEl = document.querySelector(".location");
 let previousSearchEl = document.querySelector(".previous-search");
 let locationSearchForm = document.querySelector("#location-search");
 let searchResultsContainerEl = document.querySelector(".search-results-container");
-let currentDayContainerEl = document.querySelector(".current-day-container");
+let currentDayContainerEl = document.querySelector("#location-searched");
 let fiveDayContainerEl = document.querySelector(".five-day-container");
 
 // display variables

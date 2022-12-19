@@ -11,7 +11,7 @@ let fiveDayContainerEl = document.querySelector(".five-day-container");
 
 // display variables
 let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData"));
-console.log(currentWeather);
+// console.log(currentWeather);
 
 
 
@@ -49,6 +49,7 @@ let getLocationCurrentWeather = function (locationSearched) {
                 console.log(data);
             if (response.ok) {
                 localStorage.setItem("currentWeatherData", JSON.stringify(data));
+                console.log(currentWeather + "( source: getLocationCurrentWeather)"); //FIXME: this currently reads null.
                 displayCurrentWeather(); 
             }else{
             alert("Error: " + response.statusText);
@@ -63,6 +64,7 @@ let getLocationCurrentWeather = function (locationSearched) {
 // previous search button is created within aside div
 
 
+
 // this previous button must be able to be clicked to redo the search request
     // local storage needs to be used for this.
 
@@ -75,7 +77,9 @@ let getLocationCurrentWeather = function (locationSearched) {
 
 let displayCurrentWeather = function () {
 
-    let currentTemp = currentWeather.main.temp; //FIXME: causing a break in the code - needs something in the local storage to be able to read?
+    console.log(currentWeather + " (source: displayCurrentWeather)");
+
+    let currentTemp = currentWeather.main.temp; 
     console.log(currentTemp); //used for debugging
 
     let currentHumidity = currentWeather.main.humidity;
@@ -98,9 +102,10 @@ let displayCurrentWeather = function () {
     let locationNameEL = document.createElement("h2");
     
     let titleEL = document.createElement("span");
-    titleEL.textContent = locationInputEl;
+    titleEL.textContent = location;
 
-    locationNameEL.appendChild(titleEL);
+    searchResultsContainerEl.appendChild(titleEL);
+    // document.getElementsByClassName(".subtitle").appendChild(locationNameEL);
 
     console.log("weather is not empty");
     };

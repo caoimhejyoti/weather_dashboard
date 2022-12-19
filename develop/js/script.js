@@ -19,6 +19,8 @@ let locationSearchForm = document.querySelector(".location-search");
     }else {
         alert("Please enter a location");
     }
+
+    console.log("formSubmitLocation function is working"); //testing readability of function
  };
 // user selects search button
 

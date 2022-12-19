@@ -22,7 +22,7 @@ let locationSearchForm = document.querySelector(".location-search");
 
     console.log("formSubmitLocation function is working"); //testing readability of function
  };
-// user selects search button
+
 
 
 // selecting search button triggers API information fetch request
@@ -64,6 +64,8 @@ let getLocationWeather = function (locationSearched) {
 
 
 
+// user selects search button
+locationSearchForm.addEventListener('submit', formSubmitLocation);
 // APIs
 // need to add geocoding
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={"73d12f90301263ae1498b68e5abab7e5"};

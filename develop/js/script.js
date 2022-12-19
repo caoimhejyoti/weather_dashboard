@@ -1,7 +1,8 @@
 // global variables
-let apiBaseURL = 'http://http://api.openweathermap.org/data/2.5/weather?q=';
-let apiKey = "&APPID=73d12f90301263ae1498b68e5abab7e5";
+let apiBaseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
+let apiKey = '&appid=73d12f90301263ae1498b68e5abab7e5';
 let locationInputEl = document.querySelector(".location");
+console.log(locationInputEl); //used for debugging
 let previousSearchEl = document.querySelector(".previous-search");
 let locationSearchForm = document.querySelector("#location-search");
 let searchResultsContainerEl = document.querySelector(".search-results-container");
@@ -9,17 +10,28 @@ let currentDayContainerEl = document.querySelector("#location-searched");
 let fiveDayContainerEl = document.querySelector(".five-day-container");
 
 // display variables
+let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData"));
+console.log(currentWeather);
+let currentTemp = currentWeather.main.temp;
+console.log(currentTemp); //used for debugging
+
+let currentHumidity = currentWeather.main.humidity;
+console.log(currentHumidity); //used for debugging
+
+let currentWind = currentWeather.wind.speed;
+console.log(currentWind); //used for debugging
 
 
-
-// TODO: REVIEW: user inputs information into search field
+// TODO: REVIEW: user inputs information into search field - WORKING!
  let formSubmitLocation = function (e) {
     e.preventDefault();
     
     let location = locationInputEl.value.trim();
 
+    console.log(location + " formSubmitLocation Function"); //used for debugging
+
     if (location) {
-        getLocationWeather(location);
+        getLocationCurrentWeather(location);
 
         previousSearchEl.textContent = " ";
         locationInputEl.value = " ";
@@ -27,24 +39,31 @@ let fiveDayContainerEl = document.querySelector(".five-day-container");
         alert("Please enter a location");
     }
 
-    console.log("formSubmitLocation function is working"); //testing readability of function
+    console.log("formSubmitLocation function is working"); //used for debugging
  };
 
 
 
 // TODO: REVIEW: selecting search button triggers API information fetch request
-let getLocationWeather = function (locationSearched) {
-    let apiURL = apiBaseURL + locationSearched + apiKey;
+let getLocationCurrentWeather = function (locationSearched) {
+    let apiURL = apiBaseURL +locationSearched + "&limit=1" + apiKey + "&units=metric";
+
+    console.log(apiURL); //used for debugging
 
     fetch (apiURL)
-        .then (function (response) {
+        .then (function (response){
+            response.json().then(function (data) {
+                console.log(data);
+
+
+
             if (response.ok) {
-                response.json().then(function (data) {
-                    displayWeather(data, locationSearched);
-                });
-            }else {
-                alert("Error: " + response.statusText);
+                localStorage.setItem("currentWeatherData", JSON.stringify(data));
+                displayCurrentWeather(); //FIXME: causing an error
+            }else{
+            alert("Error: " + response.statusText);
             }
+           });
         })
         .catch (function (error) {
             alert("Unable to connect to WeatherService");
@@ -63,15 +82,19 @@ let getLocationWeather = function (locationSearched) {
     //[present] current day card across the top of the page
     //[future] 5 day forcast is created below with each day being a card. 
     // information required is date, temp (C), wind (KMPH) and humidity.
-let displayWeather = function (weather, searchTerm) {
 
-    if (weather.length === 0) {
+let displayCurrnetWeather = function () {
+
+    if (currentWeather.length === 0) {
         currentDayContainerEl.textContent = "Location not found";
         return;
     }
     console.log("weather is empty");
 
-    locationSearchTerm.textContent = searchTerm;
+    let location = locationInputEl.value.trim();
+
+    console.log(location + " displayCurrentWeather Function"); //used for debugging
+    // locationSearchTerm.textContent = searchTerm;
 
     for (var i = 0; i < weather.length; i++) {
 

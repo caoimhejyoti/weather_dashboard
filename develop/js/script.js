@@ -42,8 +42,6 @@ let currentWind = currentWeather.wind.speed + "km/h";
     console.log("formSubmitLocation function is reading"); //used for debugging
  };
 
-
-
 // TODO: REVIEW: selecting search button triggers API information fetch request
 let getLocationCurrentWeather = function (locationSearched) {
     let apiURL = apiBaseURL +locationSearched + "&limit=1" + apiKey + "&units=metric";
@@ -137,7 +135,3 @@ let displayCurrentWeather = function () {
 
 // user selects search button
 locationSearchForm.addEventListener('submit', formSubmitLocation);
-// APIs
-// need to add geocoding
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={"73d12f90301263ae1498b68e5abab7e5"};
-// https://openweathermap.org/api/geocoding-api

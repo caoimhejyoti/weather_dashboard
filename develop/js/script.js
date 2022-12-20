@@ -13,8 +13,9 @@ let fiveDayContainerEl = document.querySelector(".five-day-container");
 
 // display variables
 let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
-// console.log(currentWeather);
+// console.log(currentWeather); //used for debugging
 let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // null
+// console.log(forecastWeather); //used for debugging
 
 
 
@@ -143,12 +144,23 @@ let displayCurrentWeather = function () {
     };
 };
 
-//DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
-let displayFiveDayforecast = function () { //FIXME: not currently reading at all. 
-    for (let i = 0; i < forecastWeather.length; i++) {
+//TODO: Need to create cards for forecast and append data to display DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
+let displayFiveDayforecast = function () { 
+    console.log("inside displayFiveDayforecast"); // WORKING!
+    // console.log(forecastWeather + "source: displayFiveDayforecast1" ); // WORKING! 
+    for (let i = 0; i < 50; i++) {
+        // console.log(forecastWeather + "source: displayFiveDayforecast2" ); // WORKING!
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
+        let forecastDate = forecastWeather.list[i].dt_txt.split(" ")[0];
+        // console.log(hourForecast);
         if (hourForecast == "00:00:00") {
-            let forecastResults = forecastWeather.list[i].main.temp;
+            let forecastResults = [ //WORKING!
+                "Date: " + forecastDate,
+                "Temp: " + forecastWeather.list[i].main.temp,
+                "Humiditiy: " + forecastWeather.list[i].main.humidity + "%",
+                "Wind: " + forecastWeather.list[i].wind.speed + "km/h",
+            ];
+
             console.log(forecastResults);
         };
     };

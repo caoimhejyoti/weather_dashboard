@@ -1,5 +1,6 @@
 // global variables
 let apiBaseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
+// let forcastBaseAPI = 'https://api.openweathermap.org/data/2.5/forcast?';
 let apiKey = '&appid=73d12f90301263ae1498b68e5abab7e5';
 let locationInputEl = document.querySelector(".location");
 console.log(locationInputEl); //used for debugging
@@ -12,14 +13,14 @@ let fiveDayContainerEl = document.querySelector(".five-day-container");
 // display variables
 let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
 // console.log(currentWeather);
-let currentId = currentWeather.id; 
-// console.log(currentId); //used for debugging
-let currentTemp = currentWeather.main.temp + "°C"; 
-// console.log(currentTemp); //used for debugging
-let currentHumidity = currentWeather.main.humidity + "%";
-// console.log(currentHumidity); //used for debugging
-let currentWind = currentWeather.wind.speed + "km/h";
-// console.log(currentWind); //used for debugging
+// let currentId = currentWeather.id; 
+// // console.log(currentId); //used for debugging
+// let currentTemp = currentWeather.main.temp + "°C"; 
+// // console.log(currentTemp); //used for debugging
+// let currentHumidity = currentWeather.main.humidity + "%";
+// // console.log(currentHumidity); //used for debugging
+// let currentWind = currentWeather.wind.speed + "km/h";
+// // console.log(currentWind); //used for debugging
 
 
 // TODO: REVIEW: user inputs information into search field - WORKING!
@@ -32,6 +33,7 @@ let currentWind = currentWeather.wind.speed + "km/h";
 
     if (location) {
         getLocationCurrentWeather(location);
+        // getLocationForcast();
 
         previousSearchEl.textContent = " ";
         locationInputEl.value = " ";
@@ -70,20 +72,51 @@ let getLocationCurrentWeather = function (locationSearched) {
 // previous search button is created within aside div
 
 
+// let getLocationForcast = function (){
+//     currentLon = currentWeather.coord.lon;
+//     console.log("currentLon: " + currentLon); //used for debugging
+//     currentLat = currentWeather.coord.lat;
+//     console.log("currentLat: " + currentLat); //used for debugging
 
-// this previous button must be able to be clicked to redo the search request
-    // local storage needs to be used for this.
+//     let forcastAPI = forcastBaseAPI + "lat=" + currnetLat +  "&lon=" + currentLon + apiKey + "&units=metric";
+//     console.log(forcastAPI);
+// //     // console.log(apiURL); //used for debugging
 
-
+// //     // fetch (apiURL)
+// //     //     .then (function (response){
+// //     //         response.json().then(function (data) {
+// //     //             console.log(data);
+// //     //         if (response.ok) {
+// //     //             localStorage.setItem("currentWeatherData", JSON.stringify(data));
+// //     //             currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); 
+// //     //             console.log(currentWeather + " (source: getLocationCurrentWeather)"); 
+// //     //             displayCurrentWeather(); 
+// //     //         }else{
+// //     //         alert("Error: " + response.statusText);
+// //     //         }
+// //     //        });
+// //     //     })
+// //     //     .catch (function (error) {
+// //     //         alert("Unable to connect to WeatherService");
+// //     //     });
+// //     // console.log("fetch apiURL is reading");
+// };
 
 // search results create new HTML elements
-    //[present] current day card across the top of the page
-    //[future] 5 day forcast is created below with each day being a card. 
-    // information required is date, temp (C), wind (KMPH) and humidity.
+
+//[present] current day card across the top of the page
 
 let displayCurrentWeather = function () {
     // console.log(currentWeather + " (source: displayCurrentWeather)");
     
+    let currentId = currentWeather.id; 
+    // console.log(currentId); //used for debugging
+    let currentTemp = currentWeather.main.temp + "°C"; 
+    // console.log(currentTemp); //used for debugging
+    let currentHumidity = currentWeather.main.humidity + "%";
+    // console.log(currentHumidity); //used for debugging
+    let currentWind = currentWeather.wind.speed + "km/h";
+    // console.log(currentWind); //used for debugging
 
 
     if (currentWeather.length === 0) { //COMPLETE!
@@ -132,6 +165,27 @@ let displayCurrentWeather = function () {
     console.log("weather is not empty");//used for debugging
     };
 };
+
+//[future] 5 day forcast is created below with each day being a card. 
+// let displayFiveDayForcast = function () {
+        // console.log(fiveDayForcast + " (source: displayFiveDayForcast)");
+
+
+
+// previous search button is created within aside div
+
+
+
+// this previous button must be able to be clicked to redo the search request
+    // local storage needs to be used for this.
+
+
+
+// search results create new HTML elements
+
+    // information required is date, temp (C), wind (KMPH) and humidity.
+
+
 
 // user selects search button
 locationSearchForm.addEventListener('submit', formSubmitLocation);

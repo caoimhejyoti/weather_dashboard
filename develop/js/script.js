@@ -1,6 +1,6 @@
 // global variables
 let apiBaseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
-let forcastBaseAPI = 'https://api.openweathermap.org/data/2.5/forecast?';
+let forecastBaseAPI = 'https://api.openweathermap.org/data/2.5/forecast?';
 let apiKey = '&appid=73d12f90301263ae1498b68e5abab7e5';
 let locationInputEl = document.querySelector(".location");
 // console.log(locationInputEl); //used for debugging
@@ -10,9 +10,9 @@ let searchResultsContainerEl = document.querySelector(".search-results-container
 let currentDayContainerEl = document.querySelector(".current-day-container");
 let fiveDayContainerEl = document.querySelector(".five-day-container");
 
-// // display variables
-// let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
-// // console.log(currentWeather);
+// display variables
+let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
+// console.log(currentWeather);
 
 // [moved to displayCurrentWeather function]
 // let currentId = currentWeather.id; 
@@ -46,7 +46,7 @@ let fiveDayContainerEl = document.querySelector(".five-day-container");
     console.log("formSubmitLocation function is reading"); //used for debugging
  };
 
-// TODO: REVIEW: selecting search button triggers API information fetch request
+// TODO: REVIEW: selecting search button triggers API information fetch request for current weather
 let getLocationCurrentWeather = function (locationSearched) {
     let apiURL = apiBaseURL +locationSearched + "&limit=1" + apiKey + "&units=metric";
 
@@ -61,7 +61,7 @@ let getLocationCurrentWeather = function (locationSearched) {
                 currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); 
                 console.log(currentWeather + " (source: getLocationCurrentWeather)"); 
                 displayCurrentWeather(); 
-                getLocationForcast();
+                getLocationforecast();
             }else{
             alert("Error: " + response.statusText);
             }
@@ -72,33 +72,32 @@ let getLocationCurrentWeather = function (locationSearched) {
         });
     console.log("fetch apiURL is reading");
 };
-// previous search button is created within aside div
 
-// display variables
-let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
-// console.log(currentWeather);
+// TODO: previous search button is created within aside div
 
 
-let getLocationForcast = function (){
-    console.log("currentWeather within getLocationForcast: " + currentWeather); //used for debugging
+
+// TODO: REVIEW: selecting search button triggers API information fetch request for forecast
+let getLocationforecast = function (){
+    console.log("currentWeather within getLocationforecast: " + currentWeather); //used for debugging
     currentLon = currentWeather.coord.lon;
     console.log("currentLon: " + currentLon); //used for debugging
     currentLat = currentWeather.coord.lat;
     console.log("currentLat: " + currentLat); //used for debugging
     
-    let forcastAPI = forcastBaseAPI + "lat=" + currentLat +  "&lon=" + currentLon + apiKey + "&units=metric";
-    console.log(forcastAPI);
+    let forecastAPI = forecastBaseAPI + "lat=" + currentLat +  "&lon=" + currentLon + apiKey + "&units=metric";
+    console.log(forecastAPI);
 
-    fetch(forcastAPI)
+    fetch(forecastAPI)
         .then(function (response) {
             response.json().then(function (data) {
-                console.log(data); //"forcastAPI data: +"
+                console.log(data); //"forecastAPI data: +"
             if (response.ok) {
-                localStorage.setItem("forcastAPIData", JSON.stringify(data));
-                forcastWeather = JSON.parse(localStorage.getItem("forcastAPIData"));
-                console.log("source: getLocationForcast- " +forcastWeather);
+                localStorage.setItem("forecastAPIData", JSON.stringify(data));
+                forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData"));
+                console.log("source: getLocationforecast- " +forecastWeather);
             }else{
-                alert("forcastAPI error: " + response.statusText);
+                alert("forecastAPI error: " + response.statusText);
             }
             })
         })
@@ -190,9 +189,9 @@ let displayCurrentWeather = function () {
     };
 };
 
-//[future] 5 day forcast is created below with each day being a card. 
-// let displayFiveDayForcast = function () {
-        // console.log(fiveDayForcast + " (source: displayFiveDayForcast)");
+//[future] 5 day forecast is created below with each day being a card. 
+// let displayFiveDayforecast = function () {
+        // console.log(fiveDayforecast + " (source: displayFiveDayforecast)");
 
 
 

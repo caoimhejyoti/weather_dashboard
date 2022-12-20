@@ -6,13 +6,20 @@ console.log(locationInputEl); //used for debugging
 let previousSearchEl = document.querySelector(".previous-search");
 let locationSearchForm = document.querySelector("#location-search");
 let searchResultsContainerEl = document.querySelector(".search-results-container");
-let currentDayContainerEl = document.querySelector("#location-searched");
+let currentDayContainerEl = document.querySelector(".current-day-container");
 let fiveDayContainerEl = document.querySelector(".five-day-container");
 
 // display variables
 let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
 // console.log(currentWeather);
-
+let currentId = currentWeather.id; 
+// console.log(currentId); //used for debugging
+let currentTemp = currentWeather.main.temp + "°C"; 
+// console.log(currentTemp); //used for debugging
+let currentHumidity = currentWeather.main.humidity + "%";
+// console.log(currentHumidity); //used for debugging
+let currentWind = currentWeather.wind.speed + "km/h";
+// console.log(currentWind); //used for debugging
 
 
 // TODO: REVIEW: user inputs information into search field - WORKING!
@@ -49,8 +56,8 @@ let getLocationCurrentWeather = function (locationSearched) {
                 console.log(data);
             if (response.ok) {
                 localStorage.setItem("currentWeatherData", JSON.stringify(data));
-                currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
-                console.log(currentWeather + " (source: getLocationCurrentWeather)"); //FIXME: this currently reads null. 
+                currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); 
+                console.log(currentWeather + " (source: getLocationCurrentWeather)"); 
                 displayCurrentWeather(); 
             }else{
             alert("Error: " + response.statusText);
@@ -77,63 +84,54 @@ let getLocationCurrentWeather = function (locationSearched) {
     // information required is date, temp (C), wind (KMPH) and humidity.
 
 let displayCurrentWeather = function () {
+    // console.log(currentWeather + " (source: displayCurrentWeather)");
+    
 
-    console.log(currentWeather + " (source: displayCurrentWeather)");
 
-    let currentTemp = currentWeather.main.temp + "°C"; 
-    console.log(currentTemp); //used for debugging
-
-    let currentHumidity = currentWeather.main.humidity + "%";
-    console.log(currentHumidity); //used for debugging
-
-    let currentWind = currentWeather.wind.speed + "km/h";
-    console.log(currentWind); //used for debugging
-
-    if (currentWeather.length === 0) {
+    if (currentWeather.length === 0) { //COMPLETE!
         currentDayContainerEl.textContent = "Location not found";
         return;
         console.log("current weather is empty"); // used for debugging
-    }else{
+    }else{ //working for current weather. FIXME: oncce the user searches again, the data is just added, not replaced.
 
     let location = currentWeather.name;
     console.log(location + " (source = displayCurrentWeather Function)"); //used for debugging
     
-    let locationNameEL = document.createElement("h2");
+    // let locationNameEL = document.createElement("h2");
     
-    let titleEL = document.createElement("span");
-    console.log("titleEL: " + titleEL); //used for debugging
+    let titleEL = document.createElement("h2");
+    // console.log("titleEL: " + titleEL); //used for debugging
+
+    let currentIdEl = document.createElement("p");
+    // console.log("currentIdEl: " + currentIdEl); //used for debugging
 
     let currentTempEl = document.createElement("p");
-    console.log("currentTempEl: " +currentTempEl); //used for debugging
+    // console.log("currentTempEl: " +currentTempEl); //used for debugging
 
     let currentHumidityEl = document.createElement("p");
-    console.log("currentHumidityEl: " + currentHumidityEl); //used for debugging
+    // console.log("currentHumidityEl: " + currentHumidityEl); //used for debugging
 
     let currentWindEl = document.createElement("p");
-    console.log("currentWindEl: " + currentWindEl); //used for debugging 
-    
-
-    
+    // console.log("currentWindEl: " + currentWindEl); //used for debugging 
+        
     titleEL.textContent = location;
-    searchResultsContainerEl.appendChild(titleEL);
+    currentDayContainerEl.append(titleEL);
     
-    console.log("searchResultsContainerEl: " + searchResultsContainerEl);//used for debugging
+    // console.log("searchResultsContainerEl: " + currentDayContainerEl);//used for debugging
     
+    currentIdEl.textContent = "ID: " + currentId;
+    currentDayContainerEl.appendChild(currentIdEl);
+
     currentTempEl.textContent = "Temp: " + currentTemp;
-    searchResultsContainerEl.appendChild(currentTempEl);
+    currentDayContainerEl.appendChild(currentTempEl);
     
     currentHumidityEl.textContent = "Humidity: " + currentHumidity;
-    searchResultsContainerEl.appendChild(currentHumidityEl);
+    currentDayContainerEl.append(currentHumidityEl);
     
     currentWindEl.textContent = "Wind: " + currentWind;
-    searchResultsContainerEl.appendChild(currentWindEl);
+    currentDayContainerEl.append(currentWindEl);
 
-    
-
-
-
-
-    console.log("weather is not empty");
+    console.log("weather is not empty");//used for debugging
     };
 };
 

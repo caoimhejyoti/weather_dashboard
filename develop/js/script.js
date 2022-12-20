@@ -80,13 +80,13 @@ let displayCurrentWeather = function () {
 
     console.log(currentWeather + " (source: displayCurrentWeather)");
 
-    let currentTemp = currentWeather.main.temp; 
+    let currentTemp = currentWeather.main.temp + "°C"; 
     console.log(currentTemp); //used for debugging
 
-    let currentHumidity = currentWeather.main.humidity;
+    let currentHumidity = currentWeather.main.humidity + "%";
     console.log(currentHumidity); //used for debugging
 
-    let currentWind = currentWeather.wind.speed;
+    let currentWind = currentWeather.wind.speed + "km/h";
     console.log(currentWind); //used for debugging
 
     if (currentWeather.length === 0) {
@@ -96,20 +96,42 @@ let displayCurrentWeather = function () {
     }else{
 
     let location = currentWeather.name;
-
     console.log(location + " (source = displayCurrentWeather Function)"); //used for debugging
-    // locationSearchTerm.textContent = searchTerm;
-
+    
     let locationNameEL = document.createElement("h2");
     
     let titleEL = document.createElement("span");
-    console.log("titleEL: " + titleEL);
-    titleEL.textContent = location;
-    
-    console.log("searchResultsContainerEl: " + searchResultsContainerEl);
+    console.log("titleEL: " + titleEL); //used for debugging
 
+    let currentTempEl = document.createElement("p");
+    console.log("currentTempEl: " +currentTempEl); //used for debugging
+
+    let currentHumidityEl = document.createElement("p");
+    console.log("currentHumidityEl: " + currentHumidityEl); //used for debugging
+
+    let currentWindEl = document.createElement("p");
+    console.log("currentWindEl: " + currentWindEl); //used for debugging 
+    
+
+    
+    titleEL.textContent = location;
     searchResultsContainerEl.appendChild(titleEL);
-    // document.getElementsByClassName(".subtitle").appendChild(locationNameEL);
+    
+    console.log("searchResultsContainerEl: " + searchResultsContainerEl);//used for debugging
+    
+    currentTempEl.textContent = "Temp: " + currentTemp;
+    searchResultsContainerEl.appendChild(currentTempEl);
+    
+    currentHumidityEl.textContent = "Humidity: " + currentHumidity;
+    searchResultsContainerEl.appendChild(currentHumidityEl);
+    
+    currentWindEl.textContent = "Wind: " + currentWind;
+    searchResultsContainerEl.appendChild(currentWindEl);
+
+    
+
+
+
 
     console.log("weather is not empty");
     };

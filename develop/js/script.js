@@ -18,7 +18,7 @@ let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // nu
 
 
 
-// TODO: make user inputs information into search field - WORKING!
+// WORKING! TODO: add any additional functions created DESCRIPTION: make user inputs information into search field
  let formSubmitLocation = function (e) {
     e.preventDefault();
     
@@ -35,7 +35,7 @@ let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // nu
     console.log("formSubmitLocation function is reading"); //used for debugging
  };
 
-// TODO: REVIEW: selecting search button triggers API information fetch request for current weather
+// TODO: DESCRIPTION:selecting search button triggers API information fetch request for current weather
 let getLocationCurrentWeather = function (locationSearched) {
     let apiURL = apiBaseURL +locationSearched + "&limit=1" + apiKey + "&units=metric";
     // console.log(apiURL); //used for debugging
@@ -61,7 +61,7 @@ let getLocationCurrentWeather = function (locationSearched) {
     console.log("fetch apiURL is reading");
 };
 
-// TODO: REVIEW: selecting search button triggers API information fetch request for forecast
+// TODO: DESCRIPTION:selecting search button triggers API information fetch request for forecast
 let getLocationForecast = function (){
     // console.log("currentWeather within getLocationForecast: " + currentWeather); //used for debugging
     currentLon = currentWeather.coord.lon;
@@ -92,7 +92,7 @@ let getLocationForecast = function (){
     console.log("fetch forcastAPI is reading"); //used for debugging
 };
 
-//search results create new HTML elements - [present] current day card across the top of the page
+//TODO: currently has no style DESCRIPTION: search results create new HTML elements - [present] current day card across the top of the page
 let displayCurrentWeather = function () {
     // console.log(currentWeather + " (source: displayCurrentWeather)");
     
@@ -143,7 +143,7 @@ let displayCurrentWeather = function () {
     };
 };
 
-//search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
+//DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
 let displayFiveDayforecast = function () { //FIXME: not currently reading at all. 
     for (let i = 0; i < forecastWeather.length; i++) {
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
@@ -154,7 +154,7 @@ let displayFiveDayforecast = function () { //FIXME: not currently reading at all
     };
 };
 
-// TODO: previous search button is created within aside div
+// COMPLETE! DESCRIPTION:previous search button is created within aside div
 // previous search button is created within aside div
 
 

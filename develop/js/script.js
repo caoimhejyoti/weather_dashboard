@@ -1,18 +1,20 @@
 // global variables
 let apiBaseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
-// let forcastBaseAPI = 'https://api.openweathermap.org/data/2.5/forcast?';
+let forcastBaseAPI = 'https://api.openweathermap.org/data/2.5/forecast?';
 let apiKey = '&appid=73d12f90301263ae1498b68e5abab7e5';
 let locationInputEl = document.querySelector(".location");
-console.log(locationInputEl); //used for debugging
+// console.log(locationInputEl); //used for debugging
 let previousSearchEl = document.querySelector(".previous-search");
 let locationSearchForm = document.querySelector("#location-search");
 let searchResultsContainerEl = document.querySelector(".search-results-container");
 let currentDayContainerEl = document.querySelector(".current-day-container");
 let fiveDayContainerEl = document.querySelector(".five-day-container");
 
-// display variables
-let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
-// console.log(currentWeather);
+// // display variables
+// let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
+// // console.log(currentWeather);
+
+// [moved to displayCurrentWeather function]
 // let currentId = currentWeather.id; 
 // // console.log(currentId); //used for debugging
 // let currentTemp = currentWeather.main.temp + "°C"; 
@@ -23,7 +25,7 @@ let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // 
 // // console.log(currentWind); //used for debugging
 
 
-// TODO: REVIEW: user inputs information into search field - WORKING!
+// TODO: make user inputs information into search field - WORKING!
  let formSubmitLocation = function (e) {
     e.preventDefault();
     
@@ -33,7 +35,7 @@ let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // 
 
     if (location) {
         getLocationCurrentWeather(location);
-        // getLocationForcast();
+
 
         previousSearchEl.textContent = " ";
         locationInputEl.value = " ";
@@ -59,6 +61,7 @@ let getLocationCurrentWeather = function (locationSearched) {
                 currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); 
                 console.log(currentWeather + " (source: getLocationCurrentWeather)"); 
                 displayCurrentWeather(); 
+                getLocationForcast();
             }else{
             alert("Error: " + response.statusText);
             }
@@ -71,16 +74,37 @@ let getLocationCurrentWeather = function (locationSearched) {
 };
 // previous search button is created within aside div
 
+// display variables
+let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
+// console.log(currentWeather);
 
-// let getLocationForcast = function (){
-//     currentLon = currentWeather.coord.lon;
-//     console.log("currentLon: " + currentLon); //used for debugging
-//     currentLat = currentWeather.coord.lat;
-//     console.log("currentLat: " + currentLat); //used for debugging
 
-//     let forcastAPI = forcastBaseAPI + "lat=" + currnetLat +  "&lon=" + currentLon + apiKey + "&units=metric";
-//     console.log(forcastAPI);
-// //     // console.log(apiURL); //used for debugging
+let getLocationForcast = function (){
+    console.log("currentWeather within getLocationForcast: " + currentWeather); //used for debugging
+    currentLon = currentWeather.coord.lon;
+    console.log("currentLon: " + currentLon); //used for debugging
+    currentLat = currentWeather.coord.lat;
+    console.log("currentLat: " + currentLat); //used for debugging
+    
+    let forcastAPI = forcastBaseAPI + "lat=" + currentLat +  "&lon=" + currentLon + apiKey + "&units=metric";
+    console.log(forcastAPI);
+
+    fetch(forcastAPI)
+        .then(function (response) {
+            response.json().then(function (data) {
+                console.log(data); //"forcastAPI data: +"
+            if (response.ok) {
+                localStorage.setItem("forcastAPIData", JSON.stringify(data));
+                forcastWeather = JSON.parse(localStorage.getItem("forcastAPIData"));
+                console.log("source: getLocationForcast- " +forcastWeather);
+            }else{
+                alert("forcastAPI error: " + response.statusText);
+            }
+            })
+        })
+
+    // console.log(apiURL); //used for debugging
+};
 
 // //     // fetch (apiURL)
 // //     //     .then (function (response){

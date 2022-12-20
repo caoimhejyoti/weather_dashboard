@@ -144,7 +144,7 @@ let displayCurrentWeather = function () {
 };
 
 //search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
-let displayFiveDayforecast = function () {
+let displayFiveDayforecast = function () { //FIXME: not currently reading at all. 
     for (let i = 0; i < forecastWeather.length; i++) {
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
         if (hourForecast == "00:00:00") {

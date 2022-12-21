@@ -12,6 +12,10 @@ body{
     margin-left: 0.75rem;
 }
 
+/* main{
+    margin: 10px;
+} */
+
 h1{
     font-size: 2rem;
     /* margin: 1rem; */
@@ -32,7 +36,7 @@ ul{
 }
 
 .header{
-    /* margin-bottom: 1rem; */
+    margin-bottom: 1rem;
     color: var(--primary);
     background-color: var(--secondary);
 
@@ -65,9 +69,14 @@ ul{
     margin: 0.5rem 0;
 }
 
+.current-day-container{
+    padding: 10px;
+    margin-bottom: 2rem;
+}
+
 .five-day-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .forecast-card {

@@ -20,7 +20,7 @@ let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // 
 // console.log(currentWeather); //used for debugging
 let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // null
 // console.log(forecastWeather); //used for debugging
-
+let weatherIcon = document.createElement("img");
 
 
 // WORKING! TODO: add any additional functions created DESCRIPTION: make user inputs information into search field
@@ -41,7 +41,7 @@ let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // nu
     console.log("formSubmitLocation function is reading"); //used to confirm function is read.
  };
 
-//DESCRIPTION: function to store searched location and add to previous searches
+//FIXME: a sliver of a non-responsive button appears but nothing else.DESCRIPTION: function to store searched location and add to previous searches
 let displayPreviousSearch = function() {
     let location = currentWeather.name;
     // console.log("location within previous search function: " + location); //WORKING! used for debugging
@@ -132,8 +132,10 @@ let getLocationForecast = function (){
 let displayCurrentWeather = function () {
     // console.log(currentWeather + " (source: displayCurrentWeather)");
     
-    let currentId = currentWeather.id; 
-    // console.log(currentId); //used for debugging
+    let currentId = currentWeather.weather[0].icon; 
+    // console.log(currentID); //used for debugging
+    weatherIcon.src = "http://openweathermap.org/img/wn/"+ currentId +"@2x.png"
+
     let currentTemp = currentWeather.main.temp + "°C"; 
     // console.log(currentTemp); //used for debugging
     let currentHumidity = currentWeather.main.humidity + "%";
@@ -151,7 +153,7 @@ let displayCurrentWeather = function () {
         currentDayContainerEl.classList.add("card");
         let titleEL = document.createElement("h2");
         // console.log("titleEL: " + titleEL); //used for debugging
-        let currentIdEl = document.createElement("p");
+        // let currentIdEl = document.createElement("p");
         // console.log("currentIdEl: " + currentIdEl); //used for debugging
         let currentTempEl = document.createElement("p");
         // console.log("currentTempEl: " +currentTempEl); //used for debugging
@@ -164,8 +166,8 @@ let displayCurrentWeather = function () {
         currentDayContainerEl.append(titleEL);
         // console.log("searchResultsContainerEl: " + currentDayContainerEl);//used for debugging
         
-        currentIdEl.textContent = "ID: " + currentId;
-        currentDayContainerEl.appendChild(currentIdEl);
+        // currentIdEl.textContent = "ID: " + currentId; //previous iteration of images
+        currentDayContainerEl.appendChild(weatherIcon);
 
         currentTempEl.textContent = "Temp: " + currentTemp;
         currentDayContainerEl.appendChild(currentTempEl);
@@ -184,7 +186,7 @@ let displayCurrentWeather = function () {
 //TODO: Need update display to have a li not a chaion of text. CSS required DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
 let displayFiveDayforecast = function () { 
     // console.log("inside displayFiveDayforecast"); // WORKING!
-    // console.log(forecastWeather + "source: displayFiveDayforecast1" ); // WORKING! 
+    console.log(forecastWeather); // WORKING! + "source: displayFiveDayforecast1"
     for (let i = 0; i < 50; i++) {
         // console.log(forecastWeather + "source: displayFiveDayforecast2" ); // WORKING!
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
@@ -193,36 +195,40 @@ let displayFiveDayforecast = function () {
         if (hourForecast == "00:00:00") {
             let forecastResults = [ //WORKING!
                 "Date: " + forecastDate,
-                "Id: " + forecastWeather.list[i].weather[0].id,
+                "Icon: " + forecastWeather.list[i].weather[0].icon,
                 "Temp: " + forecastWeather.list[i].main.temp,
                 "Humiditiy: " + forecastWeather.list[i].main.humidity + "%",
                 "Wind: " + forecastWeather.list[i].wind.speed + "km/h",
             ];
 
+            forecastIcon = forecastWeather.list[i].weather[0].icon;
+            console.log(forecastIcon);
+            weatherIcon.src = "http://openweathermap.org/img/wn/"+ forecastIcon +"@2x.png"
+
             let forecastDayContainer = document.createElement("div");
             forecastDayContainer.classList.add("forecast-card", "card", "col-2");
             let forecastDayTitle = document.createElement("h3");
-            let forecastDayContent = document.createElement("ul");
+            let forecastDayContent = document.createElement("p");
 
 
             fiveDayContainerEl.appendChild(forecastDayContainer);
             forecastDayTitle.textContent = forecastResults[0];
             // console.log(forecastDayTitle); //used for debugging
             forecastDayContainer.appendChild(forecastDayTitle);
-            forecastDayContent.textContent = [
-                forecastResults[1],
-            ];
+            forecastDayContent.textContent = weatherIcon;
+            console.log(weatherIcon);
+            
             // console.log(forecastDayContent); //used for debugging
             forecastDayContainer.appendChild(forecastDayContent);
-            forecastDayContent.textContent += [
-                forecastResults[2],
-            ]
-            forecastDayContent.textContent +=[
-                forecastResults[3],
-            ]
-            forecastDayContent.textContent +=[
-                forecastResults[4],
-            ]
+            // forecastDayContent.textContent += [
+            //     forecastResults[2],
+            // ]
+            // forecastDayContent.textContent +=[
+            //     forecastResults[3],
+            // ]
+            // forecastDayContent.textContent +=[
+            //     forecastResults[4],
+            // ]
             // console.log(forecastResults); //used for debugging
         };
     };

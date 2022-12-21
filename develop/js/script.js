@@ -44,16 +44,30 @@ let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // nu
 //DESCRIPTION: function to store searched location and add to previous searches
 let displayPreviousSearch = function() {
     let location = currentWeather.name;
-
+    // console.log("location within previous search function: " + location); //WORKING! used for debugging
     let previousSearchBtn = document.createElement("button");
-    previousSearchBtn.classList.add("btn", "col-12", "btn-primary");
-    previousSearchBtn.setAttribute("id", "previous-search");
-    previousSearchBtn.textContent = location;
+    previousSearchEl.classList.add("btn", "col-12", "btn-secondary");
+    previousSearchEl.setAttribute("id", "previous-search");
+    // previousSearchEl.setAttribute("role", "button");
+
+    previousSearchBtn.innerHTML = location;
 
     previousSearchEl.appendChild(previousSearchBtn);
 
     console.log("displayPreviousSearch is reading"); //used to confirm function is read.
-
+    previousSearchBtn.addEventListener("click", function(e){
+    
+        e.preventDefault();
+        if (location) {
+            getLocationCurrentWeather(location);
+            displayPreviousSearch();
+            previousSearchEl.textContent = " ";
+            locationInputEl.value = " ";
+        }else {
+            alert("Please enter a location");
+        }
+        console.log("previousSearchBtn eventListener function is reading"); //used to confirm function is read.
+    });
 
 };
 

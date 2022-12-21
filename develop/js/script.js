@@ -144,7 +144,7 @@ let displayCurrentWeather = function () {
     };
 };
 
-//TODO: Need to create cards for forecast and append data to display DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
+//TODO: Need update display to have a li not a chaion of text. CSS required DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
 let displayFiveDayforecast = function () { 
     console.log("inside displayFiveDayforecast"); // WORKING!
     // console.log(forecastWeather + "source: displayFiveDayforecast1" ); // WORKING! 
@@ -156,10 +156,38 @@ let displayFiveDayforecast = function () {
         if (hourForecast == "00:00:00") {
             let forecastResults = [ //WORKING!
                 "Date: " + forecastDate,
+                "Id: " + forecastWeather.list[i].weather[0].id,
                 "Temp: " + forecastWeather.list[i].main.temp,
                 "Humiditiy: " + forecastWeather.list[i].main.humidity + "%",
                 "Wind: " + forecastWeather.list[i].wind.speed + "km/h",
             ];
+
+            let forecastDayContainer = document.createElement("div");
+            forecastDayContainer.classList.add("forecast-card", "card", "col-2");
+            let forecastDayTitle = document.createElement("h3");
+            let forecastDayContent = document.createElement("ul");
+
+
+            fiveDayContainerEl.appendChild(forecastDayContainer);
+            forecastDayTitle.textContent = forecastResults[0];
+            console.log(forecastDayTitle); //used for debugging
+            forecastDayContainer.appendChild(forecastDayTitle);
+            forecastDayContent.textContent = [
+                forecastResults[1],
+            ];
+            console.log(forecastDayContent); //used for debugging
+            forecastDayContainer.appendChild(forecastDayContent);
+            forecastDayContent.textContent += [
+                forecastResults[2],
+            ]
+            forecastDayContent.textContent +=[
+                forecastResults[3],
+            ]
+            forecastDayContent.textContent +=[
+                forecastResults[4],
+            ]
+
+
 
             console.log(forecastResults);
         };

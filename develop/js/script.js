@@ -1,7 +1,13 @@
 // global variables
+//API variables
 let apiBaseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
 let forecastBaseAPI = 'https://api.openweathermap.org/data/2.5/forecast?';
 let apiKey = '&appid=73d12f90301263ae1498b68e5abab7e5';
+let date = dayjs().format("DD/MM/YYYY");
+console.log(date);
+var currentHour = dayjs().hour();
+
+//Element Variables
 let locationInputEl = document.querySelector(".location");
 // console.log(locationInputEl); //used for debugging
 let previousSearchEl = document.querySelector(".previous-search");
@@ -10,8 +16,7 @@ let searchResultsContainerEl = document.querySelector(".search-results-container
 let currentDayContainerEl = document.querySelector(".current-day-container");
 let fiveDayContainerEl = document.querySelector(".five-day-container");
 
-
-// display variables
+// Display variables
 let currentWeather = JSON.parse(localStorage.getItem("currentWeatherData")); // null
 // console.log(currentWeather); //used for debugging
 let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // null
@@ -113,6 +118,7 @@ let displayCurrentWeather = function () {
     }else{ //working for current weather. FIXME: oncce the user searches again, the data is just added, not replaced.
         let location = currentWeather.name;
         // console.log(location + " (source = displayCurrentWeather Function)"); //used for debugging   
+        currentDayContainerEl.classList.add("card");
         let titleEL = document.createElement("h2");
         // console.log("titleEL: " + titleEL); //used for debugging
         let currentIdEl = document.createElement("p");
@@ -124,7 +130,7 @@ let displayCurrentWeather = function () {
         let currentWindEl = document.createElement("p");
         // console.log("currentWindEl: " + currentWindEl); //used for debugging 
             
-        titleEL.textContent = location;
+        titleEL.textContent = location + " - " + date;
         currentDayContainerEl.append(titleEL);
         // console.log("searchResultsContainerEl: " + currentDayContainerEl);//used for debugging
         

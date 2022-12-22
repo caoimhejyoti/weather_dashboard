@@ -83,6 +83,11 @@ img{
     justify-content: space-between;
 }
 
+#forecastCardContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
 .forecast-card {
     display: flex;
     flex-direction: column;

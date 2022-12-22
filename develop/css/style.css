@@ -68,7 +68,7 @@ img{
 } */
 
 .line{
-    height: 0.05rem;
+    height: 0.1rem;
     background: var(--secondary);
     margin: 0.5rem 0;
 }
@@ -78,7 +78,7 @@ img{
     margin-bottom: 2rem;
 }
 
-.five-day-container{
+#five-day-container{
     display: flex;
     justify-content: space-between;
 }
@@ -95,6 +95,6 @@ img{
 }
 
 .card{
-    color: var(--primary);
-    background-color: var(--secondary);
+    color: var(--secondary);
+    background-color: var(--highlight);
 }

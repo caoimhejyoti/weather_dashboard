@@ -190,29 +190,29 @@ let displayFiveDayforecast = function () {
     //container for heading
     let forecastHeadingContainerEl = document.createElement("div");
     forecastHeadingContainerEl.setAttribute("id", "forecast-heading-container");
-    forecastHeadingContainerEl.classList.add("col-8");
     //forecast heading
     let forecastHeadingEl = document.createElement("h2");
     forecastHeadingEl.textContent = "Five day forecast: ";
     //container for cards
     let forecastCardContainerEl = document.createElement("div");
     forecastCardContainerEl.setAttribute("id", "forecast-card-container");
-    forecastCardContainerEl.classList.add("col-8"); 
-    //cards for each day:
-    let forecastDayCard = document.createElement("div");
-    forecastDayCard.setAttribute("id", "forecast-day-container");
-    forecastDayCard.classList.add("card");
+
     //adding each element to the correct one! - russian doll
     forecastHeadingContainerEl.appendChild(forecastHeadingEl); //add title to title container
     fiveDayContainerEl.appendChild(forecastHeadingContainerEl); //adds title container to forcast
     fiveDayContainerEl.appendChild(forecastCardContainerEl); //adds card container to forecast 
-    
-    for (let i = 0; i < 50; i++) { 
+    console.log(forecastWeather.length);
+    console.log(forecastWeather);
+    for (let i = 0; i < forecastWeather.list.length; i++) { 
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
         let forecastDate = forecastWeather.list[i].dt_txt.split(" ")[0]; //used in previous development.
         // console.log(hourForecast); //used for debugging
         
-        if (hourForecast ==="00:00:00"){
+        if (hourForecast ==="15:00:00"){
+            //cards for each day:
+            let forecastDayCard = document.createElement("div");
+            forecastDayCard.setAttribute("id", "forecast-day-container");
+            forecastDayCard.classList.add("card");
             //add card for each day to the card container
             forecastCardContainerEl.appendChild(forecastDayCard); 
             //add classes to each card

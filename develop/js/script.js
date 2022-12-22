@@ -22,7 +22,7 @@ let forecastWeather = JSON.parse(localStorage.getItem("forecastAPIData")); // nu
 let weatherIcon = document.createElement("img");
 
 
-// WORKING! TODO: add any additional functions created DESCRIPTION: make user inputs information into search field
+// COMPLETE! DESCRIPTION: make user inputs information into search field
  let formSubmitLocation = function (e) {
     e.preventDefault();
     
@@ -41,12 +41,12 @@ let weatherIcon = document.createElement("img");
     console.log("formSubmitLocation function is reading"); //used to confirm function is read.
  };
 
-//FIXME: Only works for the first search DESCRIPTION: function to store searched location and add to previous searches
+//COMPLETE! DESCRIPTION: function to store searched location and add to previous searches as buttons to the aside.
 let displayPreviousSearch = function() {
     let location = currentWeather.name;
     // console.log("location within previous search function: " + location); //WORKING! used for debugging
     let previousSearchBtn = document.createElement("button");
-    previousSearchBtn.classList.add("btn", "col-12", "btn-secondary");
+    previousSearchBtn.classList.add("btn", "col-12", "btn-outline-secondary");
     previousSearchEl.setAttribute("id", "previous-search");
     // previousSearchEl.setAttribute("role", "button");
 
@@ -129,7 +129,7 @@ let getLocationForecast = function (){
     console.log("fetch forcastAPI is reading"); //used to confirm function is read.
 };
 
-//TODO: currently has minimal style DESCRIPTION: search results create new HTML elements - [present] current day card across the top of the page
+//COMPLETE! DESCRIPTION: search results create new HTML elements - [present] current day card across the top of the page
 let displayCurrentWeather = function () {
     // console.log(currentWeather + " (source: displayCurrentWeather)");
     
@@ -184,7 +184,7 @@ let displayCurrentWeather = function () {
     console.log("displayCurrentWeather is reading"); //used to confirm function is read.
 };
 
-//TODO: Need update display to have a li not a chaion of text. CSS required DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
+//FIXME: only one forecast card is being created. DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
 let displayFiveDayforecast = function () { 
 //variables for containers
     //container for heading
@@ -206,13 +206,10 @@ let displayFiveDayforecast = function () {
     forecastHeadingContainerEl.appendChild(forecastHeadingEl); //add title to title container
     fiveDayContainerEl.appendChild(forecastHeadingContainerEl); //adds title container to forcast
     fiveDayContainerEl.appendChild(forecastCardContainerEl); //adds card container to forecast 
-    //TODO: add card for each day to the card container
-        
-    console.log(forecastWeather); // "source: displayFiveDayforecast1"
-    for (let i = 0; i < 50; i++) { //FIXME: bringing up error message but works
-        // console.log(forecastWeather + "source: displayFiveDayforecast2" ); // WORKING!
+    
+    for (let i = 0; i < 50; i++) { 
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
-        let forecastDate = forecastWeather.list[i].dt_txt.split(" ")[0];
+        let forecastDate = forecastWeather.list[i].dt_txt.split(" ")[0]; //used in previous development.
         // console.log(hourForecast); //used for debugging
         
         if (hourForecast ==="00:00:00"){
@@ -222,7 +219,8 @@ let displayFiveDayforecast = function () {
             forecastDayCard.classList.add("forecast-card", "card") //do i need to add class col?
             //create card title (date) element + content
             let forecastDateEl = document.createElement("h3");
-            forecastDateEl.textContent = forecastDate;
+            let forecastUnixCode = forecastWeather.list[i].dt;
+            forecastDateEl.textContent = dayjs.unix(forecastUnixCode).format("DD/MM/YYYY");
             //create forecast icon element + content:
             let forecastIconEl = document.createElement("img");
             let forecastIconId = forecastWeather.list[i].weather[0].icon;
@@ -242,36 +240,16 @@ let displayFiveDayforecast = function () {
             forecastWindEl.setAttribute("id", "wind");
             forecastWindEl.classList.add("info");
             forecastWindEl.textContent = forecastWeather.list[i].wind.speed +"km/p";
-
+            //add forecast data into element:
             forecastDayCard.appendChild(forecastDateEl);
             forecastDayCard.appendChild(forecastIconEl);
             forecastDayCard.appendChild(forecastTempEl);
             forecastDayCard.appendChild(forecastHumidityEl);
-            forecastDayCard.appendChild(forecastWindEl);
-
-
-        
+            forecastDayCard.appendChild(forecastWindEl);        
         };
-
     };
     console.log("displayFiveDayForecast is reading"); //used to confirm function is read.
 };
-
-// COMPLETE! DESCRIPTION:previous search button is created within aside div
-// previous search button is created within aside div
-
-
-
-// this previous button must be able to be clicked to redo the search request
-    // local storage needs to be used for this.
-
-
-
-// search results create new HTML elements
-
-    // information required is date, temp (C), wind (KMPH) and humidity.
-
-
 
 // user selects search button
 locationSearchForm.addEventListener('submit', formSubmitLocation);

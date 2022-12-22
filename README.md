@@ -22,6 +22,7 @@ https://caoimhejyoti.github.io/weather_dashboard/
 
 ## Usage
 Weather Dashboard landing page:
+
 ![Weather Dashboard - asks user to search for a city](develop/img/weather-dashboard-landingpage.png)
 
 
@@ -30,12 +31,14 @@ If the user types in a location that doesn't exist, they will recieve an alert m
 ![Weather Dashboard - alert message reading: Location Error - not found](develop/img/weather-dashboard-error-locationunknown.png)
 
 When user searches for a city they can see the current weather and the 5 day forecast.
+![Weather Dashboard - Current weather and 5 day forecast for London visible for user to see.](develop/img/weather-dashboard-initial-search.png)
 
-FIXME: Weather Dashboard - Current weather and 5 day forecast for XXX visible for user to see.
 
 Once the user has searched for multiple cities, that can see their previous searches in the aide. These are also buttons to allowe the user to re-search.
 
-FIXME: Weather Dashboard - Current weather and 5 day forecast for XXX visible in the main body of site as well as previous searches visible in the aside.
+
+![Weather Dashboard - Current weather and 5 day forecast for multiple other cities visible in the main body of site as well as previous searches visible in the aside.](develop/img/weather-dashboard--previous-search.png)
+ 
 
 ## Future Developments
 1. Look at previous searches cancelling out if it is already visible, so that there are not souble buttons. 

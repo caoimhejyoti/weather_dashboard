@@ -33,15 +33,16 @@ let weatherIcon = document.createElement("img");
     if (location) {
         getLocationCurrentWeather(location);
         displayPreviousSearch();
-        previousSearchEl.textContent = " ";
-        locationInputEl.value = " ";
+        currentDayContainerEl.textContent = '';
+        fiveDayContainerEl.textContent = '';
+        locationInputEl.value = ' ';
     }else {
         alert("Please enter a location");
     }
     console.log("formSubmitLocation function is reading"); //used to confirm function is read.
  };
 
-//FIXME: a sliver of a non-responsive button appears but nothing else.DESCRIPTION: function to store searched location and add to previous searches
+//FIXME: a sliver of a non-responsive button appears but nothing else. Only works for the first search DESCRIPTION: function to store searched location and add to previous searches
 let displayPreviousSearch = function() {
     let location = currentWeather.name;
     // console.log("location within previous search function: " + location); //WORKING! used for debugging
@@ -61,7 +62,8 @@ let displayPreviousSearch = function() {
         if (location) {
             getLocationCurrentWeather(location);
             displayPreviousSearch();
-            previousSearchEl.textContent = " ";
+            currentDayContainerEl.textContent = '';
+            fiveDayContainerEl.textContent = '';
             locationInputEl.value = " ";
         }else {
             alert("Please enter a location");
@@ -128,7 +130,7 @@ let getLocationForecast = function (){
     console.log("fetch forcastAPI is reading"); //used to confirm function is read.
 };
 
-//TODO: currently has no style DESCRIPTION: search results create new HTML elements - [present] current day card across the top of the page
+//TODO: Need to remove previous search first. currently has minimal style DESCRIPTION: search results create new HTML elements - [present] current day card across the top of the page
 let displayCurrentWeather = function () {
     // console.log(currentWeather + " (source: displayCurrentWeather)");
     

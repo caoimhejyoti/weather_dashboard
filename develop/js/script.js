@@ -88,7 +88,7 @@ let getLocationCurrentWeather = function (locationSearched) {
                 displayCurrentWeather(); 
                 getLocationForecast();
             }else{
-            alert("Error: " + response.statusText);
+            alert("Location Error: " + response.statusText);
             }
            });
         })

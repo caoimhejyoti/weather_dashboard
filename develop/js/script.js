@@ -193,73 +193,178 @@ let displayCurrentWeather = function () {
 
 //TODO: Need update display to have a li not a chaion of text. CSS required DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
 let displayFiveDayforecast = function () { 
-    // console.log("inside displayFiveDayforecast"); // WORKING!
+    // // console.log("inside displayFiveDayforecast"); // WORKING!
+    // // let forecastHeadingContainerEl = document.createElement("div");
+    // // let forecastHeadingEl = document.createElement("h2");
+    // let forecastCardContainerEl = document.createElement("div");
+    // forecastHeadingContainerEl.classList.add("col-8");
+    // forecastCardContainerEl.classList.add("col-8", "row");
+    // forecastCardContainerEl.setAttribute("id", "forecastCardContainer");
+    // forecastHeadingEl.textContent = "Five day forecast: ";
+    // fiveDayContainerEl.appendChild(forecastHeadingContainerEl);
+    // forecastHeadingContainerEl.appendChild(forecastHeadingEl);
+    // fiveDayContainerEl.appendChild(forecastCardContainerEl);
+    
+    //variables for containers
+    //container for heading
     let forecastHeadingContainerEl = document.createElement("div");
-    let forecastHeadingEl = document.createElement("h2");
-    let forecastCardContainerEl = document.createElement("div");
+    forecastHeadingContainerEl.setAttribute("id", "forecast-heading-container");
     forecastHeadingContainerEl.classList.add("col-8");
-    forecastCardContainerEl.classList.add("col-8", "row");
-    forecastCardContainerEl.setAttribute("id", "forecastCardContainer");
+    //forecast heading
+    let forecastHeadingEl = document.createElement("h2");
     forecastHeadingEl.textContent = "Five day forecast: ";
-    fiveDayContainerEl.appendChild(forecastHeadingContainerEl);
-    forecastHeadingContainerEl.appendChild(forecastHeadingEl);
-    fiveDayContainerEl.appendChild(forecastCardContainerEl);
+    //container for cards
+    let forecastCardContainerEl = document.createElement("div");
+    forecastCardContainerEl.setAttribute("id", "forecast-card-container");
+    forecastCardContainerEl.classList.add("col-8"); 
+    //cards for each day:
+    let forecastDayCard = document.createElement("div");
+    forecastDayCard.setAttribute("id", "forecast-day-container");
+    forecastDayCard.classList.add("card");
+    //adding each element to the correct one! - russian doll
+    forecastHeadingContainerEl.appendChild(forecastHeadingEl); //add title to title container
+    fiveDayContainerEl.appendChild(forecastHeadingContainerEl); //adds title container to forcast
+    fiveDayContainerEl.appendChild(forecastCardContainerEl); //adds card container to forecast 
+    //TODO: add card for each day to the card container
     
 
     
-    console.log(forecastWeather); // WORKING! + "source: displayFiveDayforecast1"
+    console.log(forecastWeather); // "source: displayFiveDayforecast1"
     for (let i = 0; i < 50; i++) { //FIXME: bringing up error message but works
         // console.log(forecastWeather + "source: displayFiveDayforecast2" ); // WORKING!
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
         let forecastDate = forecastWeather.list[i].dt_txt.split(" ")[0];
         // console.log(hourForecast);
-        if (hourForecast == "00:00:00") {
-            let forecastResults = [ //WORKING!
-                forecastDate,
-                "Icon: " + forecastWeather.list[i].weather[0].icon,
-                "Temp: " + forecastWeather.list[i].main.temp,
-                "Humiditiy: " + forecastWeather.list[i].main.humidity + "%",
-                "Wind: " + forecastWeather.list[i].wind.speed + "km/h",
-            ];
 
-            forecastIcon = forecastWeather.list[i].weather[0].icon;
-            console.log(forecastIcon);
-            weatherIcon.src = "http://openweathermap.org/img/wn/"+ forecastIcon +"@2x.png"
+        if (hourForecast ==="00:00:00"){
+            //add card for each day to the card container
+            forecastCardContainerEl.appendChild(forecastDayCard); 
+            //add classes to each card
+            forecastDayCard.classList.add("forecast-card", "card") //do i need to add class col?
+            //create card title (date) element + content
+            let forecastDateEl = document.createElement("h3");
+            forecastDateEl.textContent = forecastDate;
+            // console.log(forecastDate);
+            //create forecast icon element + content:
+            let forecastIconEl = document.createElement("img");
+            let forecastIconId = forecastWeather.list[i].weather[0].icon;
+            forecastIconEl.src = "http://openweathermap.org/img/wn/"+ forecastIconId +"@2x.png"
+            //create forecast temp element:
+            let forecastTempEl = document.createElement("p");
+            forecastTempEl.setAttribute("id", "temperature");
+            forecastTempEl.classList.add("info");
+            forecastTempEl.textContent = forecastWeather.list[i].main.temp + "°C";
+            //create forecast Humidity element:
+            let forecastHumidityEl = document.createElement("p");
+            forecastHumidityEl.setAttribute("id", "humidity");
+            forecastHumidityEl.classList.add("info");
+            forecastHumidityEl.textContent = forecastWeather.list[i].main.humidity + "%";
+            //create forecast wind element:
+            let forecastWindEl = document.createElement("p");
+            forecastWindEl.setAttribute("id", "wind");
+            forecastWindEl.classList.add("info");
+            forecastWindEl.textContent = forecastWeather.list[i].wind.speed +"km/p";
 
-            let forecastDayContainer = document.createElement("div");
-            forecastDayContainer.classList.add("forecast-card", "card", "col");
-            let forecastDayTitle = document.createElement("h3");
-            let forecastDayContent = document.createElement("p");
-            let forecastDayList = document.createElement("li");
+            forecastDayCard.appendChild(forecastDateEl);
+            forecastDayCard.appendChild(forecastIconEl);
+            forecastDayCard.appendChild(forecastTempEl);
+            forecastDayCard.appendChild(forecastHumidityEl);
+            forecastDayCard.appendChild(forecastWindEl);
 
-            // let forecastDay = dayjs().add(i, "d").format("DD/MM/YYYY");
 
-            forecastCardContainerEl.appendChild(forecastDayContainer);
-            forecastDayTitle.textContent = forecastResults[0];
-            // console.log(forecastDayTitle); //used for debugging
-            forecastDayContainer.appendChild(forecastDayTitle);
-            console.log(weatherIcon);
+        
+        };
+
+        // if (hourForecast == "00:00:00") {
+        //     let forecastResults = [ //
+        //         forecastDate,
+        //         "Icon: " + forecastWeather.list[i].weather[0].icon,
+        //         "Temp: " + forecastWeather.list[i].main.temp,
+        //         "Humiditiy: " + forecastWeather.list[i].main.humidity + "%",
+        //         "Wind: " + forecastWeather.list[i].wind.speed + "km/h",
+        //     ];
+
+        //     forecastIcon = forecastWeather.list[i].weather[0].icon;
+        //     console.log(forecastIcon);
+        //     weatherIcon.src = "http://openweathermap.org/img/wn/"+ forecastIcon +"@2x.png"
+
+        //     let forecastDayContainer = document.createElement("div");
+        //     forecastDayContainer.classList.add("forecast-card", "card", "col");
+        //     let forecastDayTitle = document.createElement("h3");
+        //     let forecastDayContent = document.createElement("p");
+        //     let forecastDayList = document.createElement("li");
+
+        //     // let forecastDay = dayjs().add(i, "d").format("DD/MM/YYYY");
+
+        //     forecastCardContainerEl.appendChild(forecastDayContainer);
+        //     forecastDayTitle.textContent = forecastResults[0];
+        //     // console.log(forecastDayTitle); //used for debugging
+        //     forecastDayContainer.appendChild(forecastDayTitle);
+        //     console.log(weatherIcon);
             
-            forecastDayContent.textContent = weatherIcon;
-            // console.log(forecastDayContent); //used for debugging
-            forecastDayContainer.appendChild(forecastDayContent);
-            forecastDayContainer.appendChild(forecastDayList);
+        //     forecastDayContent.textContent = weatherIcon;
+        //     // console.log(forecastDayContent); //used for debugging
+        //     forecastDayContainer.appendChild(forecastDayContent);
+        //     forecastDayContainer.appendChild(forecastDayList);
 
-            forecastDayList.textContent = [
-                forecastResults[2],
-            ]
-            forecastDayList.textContent +=[
-                forecastResults[3],
-            ]
-            forecastDayList.textContent +=[
-                forecastResults[4],
-            ]
+        //     forecastDayList.textContent = [
+        //         forecastResults[2],
+        //     ]
+        //     forecastDayList.textContent +=[
+        //         forecastResults[3],
+        //     ]
+        //     forecastDayList.textContent +=[
+        //         forecastResults[4],
+        //     ]
             // console.log(forecastResults); //used for debugging
         };
     };
     console.log("displayFiveDayForecast is reading"); //used to confirm function is read.
-};
+// };
 
+
+let displayFiveDayforecast2 = function(){
+
+    //variables for containers
+    //container for heading
+    let forecastHeadingContainerEl = document.createElement("div");
+    forecastHeadingContainerEl.classList.add("col-8");
+    //forecast heading
+    let forecastHeadingEl = document.createElement("h2");
+    forecastHeadingEl.textContent = "Five day forecast: ";
+    //container for cards
+    let forecastCardContainerEl = document.createElement("div");
+    forecastCardContainerEl.classList.add("col-8"); 
+    //cards for each day:
+    let forecastDayCard = document.createElement("div");
+    forecastDayCard.setAttribute("id", "forecast-day-container");
+    forecastDayCard.classList.add("card");
+    //adding each element to the correct one! - russian doll
+    forecastHeadingContainerEl.appendChild(forecastHeadingEl); //add title to title container
+    fiveDayContainerEl.appendChild(forecastHeadingContainerEl); //adds title container to forcast
+    fiveDayContainerEl.appendChild(forecastCardContainerEl); //adds card container to forecast 
+    //TODO: add card for each day to the card container
+
+
+    for (let i = 0; i < 50; i++){
+        forecastCardContainerEl.appendChild(forecastDayCard); //adds card for each day to the card container
+        // console.log(forecastWeather);//used for debugging
+        // let forecastDate = forecastWeather.list[i].dt_txt.split(" ")[0]; //pulls date from the Forecast API data
+        let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1]; //needed to narrow down the number of entries
+        // console.log(hourForecast);//used for debugging 
+        if (hourForecast == "00:00:00") {
+            // console.log("i'm here!");//used for debugging 
+            let forecastResults = [
+                forecastDate,
+                "Temp: " + forecastWeather.list[i].main.temp,
+                "Humiditiy: " + forecastWeather.list[i].main.humidity + "%",
+                "Wind: " + forecastWeather.list[i].wind.speed + "km/h",
+            ];
+            console.log(forecastResults);
+        };
+    }
+
+}
 // COMPLETE! DESCRIPTION:previous search button is created within aside div
 // previous search button is created within aside div
 

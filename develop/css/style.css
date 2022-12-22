@@ -67,7 +67,7 @@ button{
     justify-content: space-between;
 }
 
-#forecastCardContainer{
+#forecast-card-container{
     display: flex;
     justify-content: space-between;
 }

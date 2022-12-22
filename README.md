@@ -18,7 +18,7 @@ This app allows the user to see the weather in their chosen location, see their 
 4. Using external CSS libraries for some of the features/ 
 
 ## Installation
-FIXME:
+https://caoimhejyoti.github.io/weather_dashboard/
 
 ## Usage
 Weather Dashboard landing page:

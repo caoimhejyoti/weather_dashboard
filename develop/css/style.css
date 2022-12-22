@@ -12,23 +12,16 @@ body{
     margin-left: 0.75rem;
 }
 
-/* main{
-    margin: 10px;
-} */
-
 h1{
     font-size: 2rem;
-    /* margin: 1rem; */
 }
 
 h2{
     font-size: 1.5rem;
-    /* margin-bottom: 0.5rem; */
 }
 
 h3{
     font-size: 1.2rem;
-    
 }
 
 ul{
@@ -43,11 +36,9 @@ img{
     padding-top: 0.5rem;
     color: var(--primary);
     background-color: var(--secondary);
-
 }
 
 .location{
-
     margin-bottom: 0.5rem;
     padding: 0.5rem;
     border-radius: var(--border-radius);
@@ -59,11 +50,6 @@ button{
     padding: 0.5rem;
 
 }
-
-/* .button:hover{
-    color: var(--secondary);
-    background-color: var(--highlight);
-} */
 
 .line{
     height: 0.1rem;
@@ -89,7 +75,7 @@ button{
 .forecast-card {
     display: flex;
     flex-direction: column;
-    padding: 10px;/* border-width:10px;  */
+    padding: 10px;
 }
 
 .card{

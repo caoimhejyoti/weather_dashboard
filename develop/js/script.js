@@ -5,6 +5,12 @@ let forecastBaseAPI = 'https://api.openweathermap.org/data/2.5/forecast?';
 let apiKey = '&appid=73d12f90301263ae1498b68e5abab7e5';
 let date = dayjs().format("DD/MM/YYYY");
 var currentHour = dayjs().hour();
+let forecastDay1 = dayjs().add(1, "d").format("DD/MM/YYYY");
+let forecastDay2 = dayjs().add(1, "d").format("DD/MM/YYYY");
+let forecastDay3 = dayjs().add(1, "d").format("DD/MM/YYYY");
+let forecastDay4 = dayjs().add(1, "d").format("DD/MM/YYYY");
+let forecastDay5 = dayjs().add(1, "d").format("DD/MM/YYYY");
+console.log(forecastDay1);
 
 //Element Variables
 let locationInputEl = document.querySelector(".location");
@@ -188,15 +194,28 @@ let displayCurrentWeather = function () {
 //TODO: Need update display to have a li not a chaion of text. CSS required DESCRIPTION: search results create new HTML elements - [future] 5 day forecast is created below with each day being a card. 
 let displayFiveDayforecast = function () { 
     // console.log("inside displayFiveDayforecast"); // WORKING!
+    let forecastHeadingContainerEl = document.createElement("div");
+    let forecastHeadingEl = document.createElement("h2");
+    let forecastCardContainerEl = document.createElement("div");
+    forecastHeadingContainerEl.classList.add("col-8");
+    forecastCardContainerEl.classList.add("col-8", "row");
+    forecastCardContainerEl.setAttribute("id", "forecastCardContainer");
+    forecastHeadingEl.textContent = "Five day forecast: ";
+    fiveDayContainerEl.appendChild(forecastHeadingContainerEl);
+    forecastHeadingContainerEl.appendChild(forecastHeadingEl);
+    fiveDayContainerEl.appendChild(forecastCardContainerEl);
+    
+
+    
     console.log(forecastWeather); // WORKING! + "source: displayFiveDayforecast1"
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 50; i++) { //FIXME: bringing up error message but works
         // console.log(forecastWeather + "source: displayFiveDayforecast2" ); // WORKING!
         let hourForecast = forecastWeather.list[i].dt_txt.split(" ")[1];
         let forecastDate = forecastWeather.list[i].dt_txt.split(" ")[0];
         // console.log(hourForecast);
         if (hourForecast == "00:00:00") {
             let forecastResults = [ //WORKING!
-                "Date: " + forecastDate,
+                forecastDate,
                 "Icon: " + forecastWeather.list[i].weather[0].icon,
                 "Temp: " + forecastWeather.list[i].main.temp,
                 "Humiditiy: " + forecastWeather.list[i].main.humidity + "%",
@@ -208,13 +227,14 @@ let displayFiveDayforecast = function () {
             weatherIcon.src = "http://openweathermap.org/img/wn/"+ forecastIcon +"@2x.png"
 
             let forecastDayContainer = document.createElement("div");
-            forecastDayContainer.classList.add("forecast-card", "card", "col-2");
+            forecastDayContainer.classList.add("forecast-card", "card", "col");
             let forecastDayTitle = document.createElement("h3");
             let forecastDayContent = document.createElement("p");
             let forecastDayList = document.createElement("li");
 
+            // let forecastDay = dayjs().add(i, "d").format("DD/MM/YYYY");
 
-            fiveDayContainerEl.appendChild(forecastDayContainer);
+            forecastCardContainerEl.appendChild(forecastDayContainer);
             forecastDayTitle.textContent = forecastResults[0];
             // console.log(forecastDayTitle); //used for debugging
             forecastDayContainer.appendChild(forecastDayTitle);

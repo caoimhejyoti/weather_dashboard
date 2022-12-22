@@ -81,4 +81,6 @@ button{
 .card{
     color: var(--secondary);
     background-color: var(--highlight);
+    border-color: var(--secondary);
+    border-width: 0.2rem;
 }

@@ -53,14 +53,12 @@ img{
     border-radius: var(--border-radius);
 }
 
-/* .button{
+button{
 
     margin-bottom: 0.5rem;
     padding: 0.5rem;
-    border-radius: var(--border-radius);
-    color: var(--primary);
-    background-color: var(--secondary);
-} */
+
+}
 
 /* .button:hover{
     color: var(--secondary);

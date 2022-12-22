@@ -211,26 +211,29 @@ let displayFiveDayforecast = function () {
             forecastDayContainer.classList.add("forecast-card", "card", "col-2");
             let forecastDayTitle = document.createElement("h3");
             let forecastDayContent = document.createElement("p");
+            let forecastDayList = document.createElement("li");
 
 
             fiveDayContainerEl.appendChild(forecastDayContainer);
             forecastDayTitle.textContent = forecastResults[0];
             // console.log(forecastDayTitle); //used for debugging
             forecastDayContainer.appendChild(forecastDayTitle);
-            forecastDayContent.textContent = weatherIcon;
             console.log(weatherIcon);
             
+            forecastDayContent.textContent = weatherIcon;
             // console.log(forecastDayContent); //used for debugging
             forecastDayContainer.appendChild(forecastDayContent);
-            // forecastDayContent.textContent += [
-            //     forecastResults[2],
-            // ]
-            // forecastDayContent.textContent +=[
-            //     forecastResults[3],
-            // ]
-            // forecastDayContent.textContent +=[
-            //     forecastResults[4],
-            // ]
+            forecastDayContainer.appendChild(forecastDayList);
+
+            forecastDayList.textContent = [
+                forecastResults[2],
+            ]
+            forecastDayList.textContent +=[
+                forecastResults[3],
+            ]
+            forecastDayList.textContent +=[
+                forecastResults[4],
+            ]
             // console.log(forecastResults); //used for debugging
         };
     };
